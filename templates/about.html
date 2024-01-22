@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IOT WQM : ABOUT</title>
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'water.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'static.css' %}">
+</head>
+<body>
+    <div class="top-div" style="font-size: 35px;">
+        <span>
+            &#x269B; Project Overview: Components & Protocols.
+        </span>
+    </div> 
+    <div class="body">
+        <p style="text-align: center; font-weight: bold; font-family: Garamond; font-size: 30px;">&#10018; Circuit Diagram </p>
+        <p style="text-align: center; font-weight: lighter; font-size: 20px"> <i>(Click on the numbers that are visible to read about the associated components)</i></p>
+        <div class="image-div" >
+            <div class="button-container">
+                <button class="image-button" style="margin-left: 730px; margin-top: 75px;" 
+                onclick="showDialog('<b>1</b><br><br>&nbsp;&nbsp;&nbsp;&nbsp;The DS18B20 is a digital temperature sensor widely used in various applications due to its accuracy and ease of integration. Encased in a waterproof shell, it utilizes the 1-Wire protocol for communication, allowing multiple sensors on a single data line. It works by converting temperature into a digital signal that can be easily read by compatible devices. Required for precise temperature monitoring, it’s particularly favored in IoT, weather stations, and industrial systems. As a digital sensor, it does not provide analog output and operates within a temperature range of -55°C to +125°C, making it suitable for diverse environmental conditions. Its simplicity, accuracy, and digital nature make it a preferred choice for temperature sensing in diverse settings.<br><br><br>')">1</button>
+                <button class="image-button" style="margin-left: 470px; margin-top: 5px;"
+                onclick="showDialog('<b>2</b><br><br>&nbsp;&nbsp;&nbsp;&nbsp;The Turbidity sensor from detects water quality by measuring the levels of turbidity - the cloudiness or haziness of a fluid caused by large numbers of individual particles that are generally invisible to the naked eye, similar to smoke in the air. These sensors typically use light to determine the turbidity level. A light source, often an LED, emits light into the liquid. The suspended particles in the liquid scatter the light, and the sensor measures the intensity of the scattered light to determine the turbidity. The sensor operates on the principle that when the light is passed through a sample of water, the amount of light transmitted through the sample is dependent on the amount of soil in the water. As the soil level increases, the amount of transmitted light decreases. The turbidity sensor measures the amount of transmitted light to determine the turbidity of the wash water.It can work in analog as well as digital modes and may or may not need calibrator depending on the microcontroller and model used.<br><br><br>')">2</button>
+                <button class="image-button" style="margin-left: 250px; margin-top: 150px;"
+                onclick="showDialog('<b>3</b><br><br>&nbsp;&nbsp;&nbsp;&nbsp;A pH sensor electrode is a fundamental component used to measure the acidity or alkalinity of a solution. It functions based on the principles of electrochemistry, where it detects the concentration of hydrogen ions in a solution. Typically made of special glass, the electrode produces a voltage signal corresponding to the pH level. The sensor measures this analog signal, translating it into a pH value within a specific range, usually from 0 to 14, where 7 is neutral. Connection involves the pH electrode and reference electrode attached to a pH meter or interfaced with a microcontroller for signal interpretation. It predominantly produces analog output, converting ion concentration into electrical signals. The operating conditions involve maintaining cleanliness of the electrode, calibrating it regularly, and ensuring appropriate temperature and solution conditions for accurate measurements.<br><br><br>')">3</button>
+                <button class="image-button" style="margin-left: 780px; margin-top: 25px;"
+                onclick="showDialog('<b>4</b><br><br>&nbsp;&nbsp;&nbsp;&nbsp;The Arduino UNO, combined with the Sensor Shield v5.0, is a versatile microcontroller board designed for easy prototyping in electronics projects. The Sensor Shield v5.0 serves as an interface to connect various sensors and modules to the Arduino UNO. It simplifies connections, providing labeled headers for both analog and digital pins. The Arduino UNO has onboard analog-to-digital converter (ADC) which reads analog sensor values by converting the voltage received from sensors into digital values the microcontroller can process. The Sensor Shield is crucial for easy sensor integration, acting as an intermediary to swiftly connect and communicate with various sensors, reducing wiring complexity and facilitating the use of analog and digital sensors. The analog inputs accept a range of 0-5 volts and can read analog signals within this range, providing flexibility for a wide array of sensor types and applications. Operating conditions typically involve a stable power supply, adhering to the voltage and current limitations of the board for optimal functionality.<br><br><br>')">4</button>
+                <button class="image-button" style="margin-left: 650px; margin-top: 85px;"
+                onclick="showDialog('<b>5</b><br><br>&nbsp;&nbsp;&nbsp;&nbsp;A Logic Level Converter is a device used to interface different voltage levels between digital electronic systems. It functions by translating signals between devices operating at different voltage levels, ensuring compatibility and preventing potential damage. It works by utilizing level shifting circuitry that consists of voltage dividers or transistors to convert high voltage (e.g., 5V) to low voltage (e.g., 3.3V) or vice versa. It does not directly measure analog values but rather manages digital signals and voltage transitions. Required when connecting components or modules operating at distinct voltage levels, it safeguards devices from potential damage due to mismatched voltage. Connections involve linking high and low voltage sides and adhering to specific input/output pin configurations. It is a digital device primarily handling discrete voltage levels, not analog signals. Typically, it operates within the range of 1.8V to 5V. Here, we use LLC to link Arduino UNO with ESP32<br><br><br>')">5</button>
+                <button class="image-button" style="margin-left: 515px; margin-top: 25px;"
+                onclick="showDialog('<b>6</b><br><br>&nbsp;&nbsp;&nbsp;&nbsp;The ESP32 microcontroller integrates Wi-Fi capabilities, used in this IoT application. It works by executing code and managing input and output. It measures analog values through its built-in analog-to-digital converter (ADC), which converts analog voltages into digital values. The ADC samples the analog signal, breaks it into a series of digital values, and outputs these for processing. This microcontroller is essential for IoT projects due to its compact size, low power consumption, and versatility in wireless communication. Its integrated to connect to the internet and other devices wirelessly. It is both analog and digital, as it supports both analog input for sensor readings and digital operations. The analog range typically lies between 0 to 3.3 volts. Operating conditions include working within a specified temperature range and voltage limits to ensure proper functionality and longevity. Connections involve interfacing sensors or other <br><br><br>')">6</button>
+            </div>
+        </div>
+        <h1 style="text-align: center;">&#10018; Protocols</h1>
+        <p>
+            <b>1. Serial Communication:</b><br><br>
+            Serial communication involves the transmission of data between devices, in this case, the Arduino UNO and ESP32, 
+            using serial ports. The Arduino UNO and ESP32 can communicate through their UART (Universal Asynchronous Receiver/Transmitter) 
+            interfaces. This can involve sending commands, sensor readings, or any data from one device to the other using a 
+            predefined communication protocol.<br><br><br>
+            <b>2. HTTP(HyperText Transfer Protocol):</b><br><br>
+            HTTP is used for transferring data over the internet. In this context, the ESP32 utilizes HTTP to send data to two 
+            distinct endpoints:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<i>PHPMyAdmin MySQL Database:</i><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The ESP32 sends data (sensor readings, for instance) to a PHP script that interacts with a MySQL database managed 
+            through PHPMyAdmin. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This can involve data storage and retrieval, allowing the ESP32 to store its readings in a 
+            structured database.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<i>Thingspeak:</i><br> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ThingSpeak is an IoT platform that allows the collection and storage of sensor data. The ESP32 sends data to ThingSpeak 
+            using HTTP requests &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to update specific channels within the ThingSpeak platform, enabling visualization and analysis of the data.<br><br><br>
+            <b>3. REST API for continuous database record retrieval:</b><br><br>
+            A REST (Representational State Transfer) API is used in a web interface to retrieve database records continuously. 
+            It facilitates the exchange of data by defining access to server resources. In this context, a web-based application 
+            is configured to use a RESTful API to continuously retrieve data from the database managed by PHPMyAdmin. This allows 
+            the web interface to dynamically access and display the most recent or continuously updated sensor data from the database.
+        </p>
+    </div>
+    <script>
+        function showDialog(text) {
+            // Create a dialog box (a div element)
+            const dialogBox = document.createElement('div');
+            dialogBox.className = 'dialog-box';
+
+            dialogBox.innerHTML = text; // Set the text for the dialog box
+            // Style the dialog box (You can customize this further)
+            dialogBox.style.fontWeight = 'bold';
+            dialogBox.style.fontSize = '17px';
+            dialogBox.style.fontFamily = 'Garamond;'
+            dialogBox.style.fontWeight = 'bold';
+            dialogBox.style.position = 'fixed';
+            dialogBox.style.top = '50%';
+            dialogBox.style.left = '50%';
+            dialogBox.style.transform = 'translate(-50%, -50%)';
+            dialogBox.style.backgroundColor = '#fff';
+            dialogBox.style.padding = '20px';
+            dialogBox.style.border = '1px black solid ';
+            dialogBox.style.zIndex = '9999';
+            dialogBox.style.background = '#ede99d';
+            dialogBox.style.textAlign = 'justify'
+
+            
+            // Append the dialog box to the body
+            document.body.appendChild(dialogBox);
+
+            // Close the dialog box when clicking anywhere on the screen
+            dialogBox.addEventListener('click', function() {
+                document.body.removeChild(dialogBox);
+            });
+            const closeText = document.createElement('div');
+            closeText.className = 'close-text';
+            closeText.textContent = 'Click anywhere on this box to close it';
+            dialogBox.appendChild(closeText); 
+        }
+    </script>
+</body>
+</html>

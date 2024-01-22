@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IOT: WATER QUALITY MAPPING</title>
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'water.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'static.css' %}">
+</head>
+<body>
+    <div class="top-div">
+        <span>
+            &#x269B; WATER QUALITY MAPPING - AN IOT SOLUTION &#x269B;
+        </span>
+    </div> 
+    <div class="main-div">
+        <div class="side-div">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Water quality mapping plays a pivotal role in safeguarding our most vital resource – water. 
+                With the advent of the Internet of Things (IoT), monitoring and managing water quality have reached new heights of efficiency and accuracy. 
+                Water quality mapping involves the assessment and visualization of various parameters that determine the purity, safety, and health of water resources.
+                It encompasses the analysis of factors such as pH levels,  turbidity, temperature, etc. IoT technologies have revolutionized the process of monitoring water quality. 
+                Sensors and smart devices are deployed across water bodies, collecting real-time data. 
+                These sensors continuously gather information and transmit it to central systems for analysis
+                While IoT-based water quality mapping offers numerous advantages, challenges persist, including sensor calibration, data security, and ensuring data integrity. 
+                However, continuous advancements in sensor technology and data analytics promise a brighter future for accurate and sustainable water quality management.
+                In conclusion, the integration of IoT in water quality mapping is a crucial step towards ensuring the availability of clean and safe water resources, essential for sustaining life and supporting a healthy ecosystem.</p>
+            <button class="button" id="button1" onclick="visitDashboard()">Visit Dashboard</button>
+            <button class="button" id="button2" onclick="learnaboutproj()">Learn More About The Project</button>
+        </div>
+    </div>
+    <footer>
+        <div class="credits">
+            <p>PROJECT CREATED BY: OMKAR KADAM | IRISH MATTOO | ANIRUDH SHUKLA | SHRAVAN PADELKAR</p>
+            <p>BE - INFT(B)</p>
+        </div>
+    </footer>
+    <script>
+    function visitDashboard() {
+        var url = '/dashboard/';
+        window.open(url, '_blank');
+    }
+    function learnaboutproj() {
+        var url = '/aboutproject/';
+        window.open(url, '_blank');
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IOT WQM : Dashboard</title>
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'water.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'static.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="top-div" style="font-size: 35px;">
+        <span>
+            &#x269B; IOT WATER QUALITY MAPPING : DASHBOARD &#x269B;
+        </span>
+    </div> 
+    <div class="encompass" style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+    <div class="tdiv" style="width: 500px; height: 350px">
+        <canvas id="turbidityChart"></canvas>
+    </div>
+    <div class="tdiv" style="width: 500px;height: 350px">
+        <canvas id="temperatureChart"></canvas>
+    </div>
+    <div class="tdiv" style="width: 500px; height: 350px">
+        <canvas id="phChart"></canvas>
+    </div>
+    <div class="readings" style="height: 350px; width:500px;">
+        <h4>&#10023; Sensor Readings:</h4>
+        <div style="overflow-x: auto;max-height: 180px;margin-top: 30px;">
+        <table border="1" style="width: 100%; text-align: center;border-collapse: collapse;">
+            <thead style="background-color:#004080;color: white;position: sticky;top: 0;">
+                <tr>
+                    <th>ID</th>
+                    <th>Turbidity</th>
+                    <th>Temperature</th>
+                    <th>pH</th>
+                    <th>Date and Time</th>
+                </tr>
+            </thead>
+            <tbody id="sensorTableBody" style="max-height: 50px; overflow-y: auto;">
+            </tbody>
+        </table>
+        </div>
+    </div>
+    </div>
+    <script>
+        var turbidityChart, temperatureChart, phChart;
+        function createCharts(data) {
+            var dates = data.map(function (entry) {
+                return entry.datetime;
+            });
+        var turbidityData = data.map(function (entry) {
+            return entry.turbidity;
+        });
+        var temperatureData = data.map(function (entry) {
+            return entry.temp;
+        });
+        var phData = data.map(function (entry) {
+            return entry.pH;
+        });
+        if (!turbidityChart) {
+            var turbidityCtx = document.getElementById('turbidityChart').getContext('2d');
+            turbidityChart = new Chart(turbidityCtx, {
+                type: 'line',
+                    data: {
+                        labels: dates,
+                        datasets: [{
+                            label: 'Turbidity (NTU)',
+                            data: turbidityData,
+                            borderColor: 'red',
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+            });
+        } else {
+            turbidityChart.data.labels = dates;
+            turbidityChart.data.datasets[0].data = turbidityData;
+            turbidityChart.update();
+        }
+        if (!temperatureChart) {
+            var temperatureCtx = document.getElementById('temperatureChart').getContext('2d');
+            temperatureChart = new Chart(temperatureCtx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Temperature(°C)',
+                        data: temperatureData,
+                        borderColor: 'blue',
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        } else {
+            temperatureChart.data.labels = dates;
+            temperatureChart.data.datasets[0].data = temperatureData;
+            temperatureChart.update();
+        }
+        if (!phChart) {
+            var phCtx = document.getElementById('phChart').getContext('2d');
+            phChart = new Chart(phCtx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'PH',
+                        data: phData,
+                        borderColor: 'green',
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        } else {
+            phChart.data.labels = dates;
+            phChart.data.datasets[0].data = phData;
+            phChart.update();
+        }
+    }
+        let existingRecords = [];
+        function updateSensorData() {
+            $.ajax({
+                url: '/api/get_latest_sensor_data/',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    data.reverse();
+                    data.forEach(function(row) {
+                        /*$('#sensorTableBody').empty(); */
+                        let isNewRecord = true;
+                        for (let i = 0; i < existingRecords.length; i++) {
+                            if (existingRecords[i].id===row.id){
+                                isNewRecord=false;
+                                break;
+                            }
+                        }
+                        if (isNewRecord) {
+                            var tableRow = "<tr>";
+                            tableRow += "<td>" + row.id + "</td>";
+                            tableRow += "<td>" + row.turbidity + "</td>";
+                            tableRow += "<td>" + row.temp + "</td>";
+                            tableRow += "<td>" + row.pH + "</td>";
+                            var formattedDateTime = row.datetime.replace("T", " "); 
+                            tableRow += "<td>" + formattedDateTime + "</td>";
+                            tableRow += "</tr>";
+                            $('#sensorTableBody').prepend(tableRow);
+                            existingRecords.push(row);
+                        }
+                    });
+                    createCharts(data);
+                }
+            });
+        }
+        setInterval(updateSensorData, 10000); 
+        updateSensorData();
+    </script>
+</body>
+</html>
